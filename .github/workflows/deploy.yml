@@ -9,6 +9,10 @@ jobs:
   deploy:
     name: Build & deploy
     runs-on: ubuntu-latest
+    # Job-level env so the deploy step's `if` guard can read it (secrets aren't
+    # allowed directly in `if` expressions).
+    env:
+      FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
     steps:
       - uses: actions/checkout@v4
 
@@ -36,8 +40,6 @@ jobs:
       # See: https://github.com/FirebaseExtended/action-hosting-deploy
       - name: Deploy to Firebase Hosting
         if: ${{ env.FIREBASE_SERVICE_ACCOUNT != '' }}
-        env:
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}

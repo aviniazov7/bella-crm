@@ -1,0 +1,32 @@
+rules_version = '2';
+
+// Bella CRM is a single-operator app: every collection is private to
+// authenticated users. There is no public read access to client data.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    match /clients/{clientId} {
+      allow read, write: if isSignedIn();
+    }
+    match /appointments/{appointmentId} {
+      allow read, write: if isSignedIn();
+    }
+    match /payments/{paymentId} {
+      allow read, write: if isSignedIn();
+    }
+    match /reminders/{reminderId} {
+      allow read, write: if isSignedIn();
+    }
+    match /photos/{photoId} {
+      allow read, write: if isSignedIn();
+    }
+
+    // Deny everything else by default.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

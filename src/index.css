@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-ink text-rose-soft antialiased;
+    margin: 0;
+    font-family: 'Inter', system-ui, Arial, sans-serif;
+  }
+
+  /* Custom scrollbar to match the dark theme */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0f0f0f;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #363636;
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c9a96e;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-ink-300 bg-ink-100 p-5 shadow-glow;
+  }
+
+  .input-base {
+    @apply w-full rounded-lg border border-ink-300 bg-ink-50 px-3 py-2 text-sm text-rose-soft
+      placeholder:text-ink-300 focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold;
+  }
+}
+
+/* react-big-calendar dark theme overrides */
+.rbc-calendar {
+  @apply text-rose-soft;
+}
+.rbc-toolbar button {
+  @apply text-rose-soft;
+}
+.rbc-toolbar button.rbc-active {
+  background-color: #c9a96e;
+  color: #0f0f0f;
+}
+.rbc-month-view,
+.rbc-time-view,
+.rbc-header,
+.rbc-day-bg,
+.rbc-time-content,
+.rbc-time-header-content {
+  border-color: #2a2a2a !important;
+}
+.rbc-today {
+  background-color: rgba(201, 169, 110, 0.08);
+}
+.rbc-event {
+  background-color: #b98787;
+  border: none;
+}
+.rbc-off-range-bg {
+  background-color: #141414;
+}

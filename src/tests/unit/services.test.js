@@ -10,7 +10,12 @@ vi.mock('../../services/supabase', () => ({
 
 import { filterClients, clientsService } from '../../services/clients'
 import { toCalendarEvents, APPOINTMENT_STATUSES } from '../../services/appointments'
-import { totalRevenue, revenueForMonth, PAYMENT_METHODS, PAYMENT_STATUSES } from '../../services/payments'
+import {
+  totalRevenue,
+  revenueForMonth,
+  PAYMENT_METHODS,
+  PAYMENT_STATUSES,
+} from '../../services/payments'
 import { pendingReminders } from '../../services/reminders'
 
 describe('clientsService.filterClients', () => {
@@ -31,7 +36,16 @@ describe('clientsService.filterClients', () => {
 
 describe('appointmentsService.toCalendarEvents', () => {
   it('maps to calendar events', () => {
-    const appts = [{ id: '1', date: '2024-01-15', time: '10:00', duration: 60, client_name: 'Alice', service_type: 'Haircut' }]
+    const appts = [
+      {
+        id: '1',
+        date: '2024-01-15',
+        time: '10:00',
+        duration: 60,
+        client_name: 'Alice',
+        service_type: 'Haircut',
+      },
+    ]
     const events = toCalendarEvents(appts)
     expect(events[0].title).toContain('Alice')
     expect(events[0].start).toBeInstanceOf(Date)

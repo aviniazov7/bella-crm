@@ -48,12 +48,26 @@ function Sparkline({ data, stroke, fill }) {
   const range = max - min || 1
   const step = w / (data.length - 1)
   const pts = data.map((d, i) => [i * step, h - ((d - min) / range) * (h - 6) - 3])
-  const line = pts.map((p, i) => (i === 0 ? 'M' : 'L') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ')
+  const line = pts
+    .map((p, i) => (i === 0 ? 'M' : 'L') + p[0].toFixed(1) + ' ' + p[1].toFixed(1))
+    .join(' ')
   const area = line + ' L' + w + ' ' + h + ' L0 ' + h + ' Z'
   return (
-    <svg viewBox={'0 0 ' + w + ' ' + h} preserveAspectRatio="none" className="h-9 w-full" aria-hidden="true">
+    <svg
+      viewBox={'0 0 ' + w + ' ' + h}
+      preserveAspectRatio="none"
+      className="h-9 w-full"
+      aria-hidden="true"
+    >
       <path d={area} fill={fill} />
-      <path d={line} fill="none" stroke={stroke} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d={line}
+        fill="none"
+        stroke={stroke}
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   )
 }
@@ -73,7 +87,12 @@ export function StatCard({ label, value, icon, accent = 'neutral', trend, spark 
           <CountUp value={value} />
         </p>
         {up !== null && (
-          <span className={cn('mb-1 flex items-center gap-1 text-xs font-medium', up ? 'text-positive' : 'text-negative')}>
+          <span
+            className={cn(
+              'mb-1 flex items-center gap-1 text-xs font-medium',
+              up ? 'text-positive' : 'text-negative'
+            )}
+          >
             {up ? <TrendingUp className="h-3.5 w-3.5" /> : <TrendingDown className="h-3.5 w-3.5" />}
             {(up ? '+' : '') + trend + '%'}
           </span>

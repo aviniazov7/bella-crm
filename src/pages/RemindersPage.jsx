@@ -56,7 +56,9 @@ export function RemindersPage() {
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="font-serif text-3xl font-bold text-cream">תזכורות</h1>
-        <Button onClick={() => setOpen(true)}><Plus className="h-4 w-4" /> תזכורת חדשה</Button>
+        <Button onClick={() => setOpen(true)}>
+          <Plus className="h-4 w-4" /> תזכורת חדשה
+        </Button>
       </div>
 
       {reminders.isLoading ? (
@@ -66,7 +68,12 @@ export function RemindersPage() {
           icon={<BellRing className="h-7 w-7" />}
           title="אין תזכורות פעילות"
           description="צרי תזכורות למעקב אחר לקוחות, ימי הולדת ותורים חוזרים."
-          action={<Button size="sm" onClick={() => setOpen(true)}><Plus className="h-4 w-4" />הוסף תזכורת ראשונה</Button>}
+          action={
+            <Button size="sm" onClick={() => setOpen(true)}>
+              <Plus className="h-4 w-4" />
+              הוסף תזכורת ראשונה
+            </Button>
+          }
         />
       ) : (
         <div className="flex flex-col gap-3">

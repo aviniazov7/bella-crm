@@ -8,9 +8,7 @@ export const Select = forwardRef(function Select(
   ref
 ) {
   const inputId = id || rest.name
-  const normalized = options.map((o) =>
-    typeof o === 'object' ? o : { value: o, label: o }
-  )
+  const normalized = options.map((o) => (typeof o === 'object' ? o : { value: o, label: o }))
   return (
     <div className="flex flex-col gap-1.5">
       {label && (

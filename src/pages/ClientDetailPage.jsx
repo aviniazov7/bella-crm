@@ -81,9 +81,19 @@ export function ClientDetailPage() {
         <div className="flex-1">
           <h1 className="text-2xl font-bold text-rose-soft">{client.name}</h1>
           <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-rose-soft/70">
-            <span className="flex items-center gap-1.5"><Phone className="h-4 w-4 text-gold" /> {formatPhone(client.phone)}</span>
-            {client.email && <span className="flex items-center gap-1.5"><Mail className="h-4 w-4 text-gold" /> {client.email}</span>}
-            {client.birthdate && <span className="flex items-center gap-1.5"><Cake className="h-4 w-4 text-gold" /> {formatDate(client.birthdate)}</span>}
+            <span className="flex items-center gap-1.5">
+              <Phone className="h-4 w-4 text-gold" /> {formatPhone(client.phone)}
+            </span>
+            {client.email && (
+              <span className="flex items-center gap-1.5">
+                <Mail className="h-4 w-4 text-gold" /> {client.email}
+              </span>
+            )}
+            {client.birthdate && (
+              <span className="flex items-center gap-1.5">
+                <Cake className="h-4 w-4 text-gold" /> {formatDate(client.birthdate)}
+              </span>
+            )}
           </div>
         </div>
         <div className="text-left">

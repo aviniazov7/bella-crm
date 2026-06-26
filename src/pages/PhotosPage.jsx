@@ -73,7 +73,9 @@ export function PhotosPage() {
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="font-serif text-3xl font-bold text-cream">תמונות לפני / אחרי</h1>
-        <Button onClick={() => setOpen(true)}><Plus className="h-4 w-4" /> העלאת תמונות</Button>
+        <Button onClick={() => setOpen(true)}>
+          <Plus className="h-4 w-4" /> העלאת תמונות
+        </Button>
       </div>
 
       {photos.isLoading ? (
@@ -83,7 +85,12 @@ export function PhotosPage() {
           icon={<ImageIcon className="h-7 w-7" />}
           title="עדיין אין תמונות בגלריה"
           description="העלי תמונות לפני ואחרי כדי לתעד את התוצאות של הלקוחות."
-          action={<Button size="sm" onClick={() => setOpen(true)}><Plus className="h-4 w-4" />העלאת תמונה ראשונה</Button>}
+          action={
+            <Button size="sm" onClick={() => setOpen(true)}>
+              <Plus className="h-4 w-4" />
+              העלאת תמונה ראשונה
+            </Button>
+          }
         />
       ) : (
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">

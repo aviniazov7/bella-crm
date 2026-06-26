@@ -5,7 +5,6 @@
 import { supabase } from './supabase'
 
 export function createCollectionService(tableName, { defaultOrderBy = 'created_at' } = {}) {
-
   async function list() {
     const { data, error } = await supabase
       .from(tableName)
@@ -16,11 +15,7 @@ export function createCollectionService(tableName, { defaultOrderBy = 'created_a
   }
 
   async function get(id) {
-    const { data, error } = await supabase
-      .from(tableName)
-      .select('*')
-      .eq('id', id)
-      .single()
+    const { data, error } = await supabase.from(tableName).select('*').eq('id', id).single()
     if (error) {
       if (error.code === 'PGRST116') return null
       throw error

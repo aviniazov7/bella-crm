@@ -33,7 +33,10 @@ function Avatar({ name }) {
 export function ClientsPage() {
   const navigate = useNavigate()
   const toast = useToast()
-  const { items, isLoading, create, update, remove, isMutating } = useCollection('clients', clientsService)
+  const { items, isLoading, create, update, remove, isMutating } = useCollection(
+    'clients',
+    clientsService
+  )
 
   const [search, setSearch] = useState('')
   const debounced = useDebounce(search, 250)
@@ -79,8 +82,16 @@ export function ClientsPage() {
       ),
     },
     { key: 'phone', header: 'טלפון', render: (r) => formatPhone(r.phone) },
-    { key: 'email', header: 'אימייל', render: (r) => <span className="text-cream/70">{r.email || '—'}</span> },
-    { key: 'birthdate', header: 'תאריך לידה', render: (r) => <span className="text-cream/70">{formatDate(r.birthdate) || '—'}</span> },
+    {
+      key: 'email',
+      header: 'אימייל',
+      render: (r) => <span className="text-cream/70">{r.email || '—'}</span>,
+    },
+    {
+      key: 'birthdate',
+      header: 'תאריך לידה',
+      render: (r) => <span className="text-cream/70">{formatDate(r.birthdate) || '—'}</span>,
+    },
     {
       key: 'actions',
       header: 'פעולות',
@@ -132,10 +143,19 @@ export function ClientsPage() {
             <EmptyState
               icon={<Users className="h-7 w-7" />}
               title={debounced ? 'לא נמצאו לקוחות' : 'עדיין אין לקוחות'}
-              description={debounced ? 'נסי לחפש בשם, טלפון או אימייל אחר.' : 'הלקוחות שתוסיפי ינוהלו כאן במקום אחד.'}
-              action={!debounced && (
-                <Button size="sm" onClick={() => setEditing({})}><Plus className="h-4 w-4" />הוסף לקוח ראשון</Button>
-              )}
+              description={
+                debounced
+                  ? 'נסי לחפש בשם, טלפון או אימייל אחר.'
+                  : 'הלקוחות שתוסיפי ינוהלו כאן במקום אחד.'
+              }
+              action={
+                !debounced && (
+                  <Button size="sm" onClick={() => setEditing({})}>
+                    <Plus className="h-4 w-4" />
+                    הוסף לקוח ראשון
+                  </Button>
+                )
+              }
             />
           }
         />

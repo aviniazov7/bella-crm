@@ -5,9 +5,15 @@
 @tailwind utilities;
 
 @layer base {
-  :root { color-scheme: dark; }
+  :root {
+    color-scheme: dark;
+  }
 
-  html, body, #root { height: 100%; }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
 
   body {
     @apply bg-ink text-cream antialiased;
@@ -19,12 +25,27 @@
     background-attachment: fixed;
   }
 
-  h1, h2, h3, .font-serif { font-family: 'Playfair Display', Georgia, serif; }
+  h1,
+  h2,
+  h3,
+  .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
 
-  ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-track { background: #0a0a0a; }
-  ::-webkit-scrollbar-thumb { background: #242424; border-radius: 6px; }
-  ::-webkit-scrollbar-thumb:hover { background: #333333; }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #242424;
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #333333;
+  }
 }
 
 @layer components {
@@ -42,7 +63,9 @@
       placeholder:text-muted/60 transition-all duration-200
       focus:border-gold/50 focus:outline-none focus:ring-2 focus:ring-gold/15;
   }
-  .skeleton { @apply relative overflow-hidden rounded-lg bg-ink-200; }
+  .skeleton {
+    @apply relative overflow-hidden rounded-lg bg-ink-200;
+  }
   .skeleton::after {
     @apply absolute inset-0 animate-shimmer;
     content: '';
@@ -52,9 +75,14 @@
 }
 
 /* ===== react-big-calendar : elegant dark theme ===== */
-.rbc-calendar { @apply text-cream; }
+.rbc-calendar {
+  @apply text-cream;
+}
 
-.rbc-toolbar { margin-bottom: 1.25rem; gap: 0.5rem; }
+.rbc-toolbar {
+  margin-bottom: 1.25rem;
+  gap: 0.5rem;
+}
 .rbc-toolbar .rbc-toolbar-label {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.05rem;
@@ -71,23 +99,24 @@
 }
 .rbc-toolbar button:hover {
   color: #f5efe6;
-  background: rgba(255,255,255,0.03);
+  background: rgba(255, 255, 255, 0.03);
   border-color: #333333;
 }
 .rbc-toolbar button:active,
 .rbc-toolbar button.rbc-active {
-  background-color: rgba(201,169,110,0.14) !important;
-  border-color: rgba(201,169,110,0.5) !important;
+  background-color: rgba(201, 169, 110, 0.14) !important;
+  border-color: rgba(201, 169, 110, 0.5) !important;
   color: #e6d2ab !important;
   box-shadow: none !important;
 }
 
 /* grid lines : barely visible */
-.rbc-time-view, .rbc-month-view {
+.rbc-time-view,
+.rbc-month-view {
   border: 1px solid #1a1a1a;
   border-radius: 1rem;
   overflow: hidden;
-  background: rgba(255,255,255,0.012);
+  background: rgba(255, 255, 255, 0.012);
 }
 .rbc-header {
   border-color: #1a1a1a !important;
@@ -96,51 +125,104 @@
   font-size: 0.78rem;
   color: #cfc6ba;
 }
-.rbc-header + .rbc-header { border-left: 1px solid #1a1a1a !important; }
-.rbc-time-header-content, .rbc-time-content, .rbc-day-bg, .rbc-month-row, .rbc-date-cell {
+.rbc-header + .rbc-header {
+  border-left: 1px solid #1a1a1a !important;
+}
+.rbc-time-header-content,
+.rbc-time-content,
+.rbc-day-bg,
+.rbc-month-row,
+.rbc-date-cell {
   border-color: #1a1a1a !important;
 }
-.rbc-time-content > * + * > * { border-left: 1px solid #1a1a1a !important; }
-.rbc-day-bg + .rbc-day-bg { border-left: 1px solid #1a1a1a !important; }
-.rbc-month-row + .rbc-month-row { border-top: 1px solid #1a1a1a !important; }
-.rbc-timeslot-group { border-bottom: 1px solid #161616 !important; min-height: 56px; }
-.rbc-time-slot { border-top: none !important; }
-.rbc-time-content { border-top: 1px solid #1a1a1a !important; }
-.rbc-time-header.rbc-overflowing { border-right: none !important; }
-.rbc-label { color: #6b6b6b; font-size: 0.72rem; padding: 0 0.6rem; }
+.rbc-time-content > * + * > * {
+  border-left: 1px solid #1a1a1a !important;
+}
+.rbc-day-bg + .rbc-day-bg {
+  border-left: 1px solid #1a1a1a !important;
+}
+.rbc-month-row + .rbc-month-row {
+  border-top: 1px solid #1a1a1a !important;
+}
+.rbc-timeslot-group {
+  border-bottom: 1px solid #161616 !important;
+  min-height: 56px;
+}
+.rbc-time-slot {
+  border-top: none !important;
+}
+.rbc-time-content {
+  border-top: 1px solid #1a1a1a !important;
+}
+.rbc-time-header.rbc-overflowing {
+  border-right: none !important;
+}
+.rbc-label {
+  color: #6b6b6b;
+  font-size: 0.72rem;
+  padding: 0 0.6rem;
+}
 
 /* today highlight */
-.rbc-today { background-color: rgba(201, 169, 110, 0.05) !important; }
-.rbc-header.rbc-today { color: #e6d2ab; }
+.rbc-today {
+  background-color: rgba(201, 169, 110, 0.05) !important;
+}
+.rbc-header.rbc-today {
+  color: #e6d2ab;
+}
 
 /* current time indicator */
 .rbc-current-time-indicator {
   background-color: #c9a96e;
   height: 2px;
-  box-shadow: 0 0 8px rgba(201,169,110,0.6);
+  box-shadow: 0 0 8px rgba(201, 169, 110, 0.6);
 }
 
 /* events */
 .rbc-event {
-  background: linear-gradient(135deg, rgba(201,169,110,0.9), rgba(185,135,135,0.9));
+  background: linear-gradient(135deg, rgba(201, 169, 110, 0.9), rgba(185, 135, 135, 0.9));
   border: none;
   border-radius: 0.5rem;
   padding: 2px 8px;
   font-size: 0.78rem;
   color: #0a0a0a;
   font-weight: 600;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
-.rbc-event:focus { outline: 2px solid #e6d2ab; }
-.rbc-event.rbc-selected { background: linear-gradient(135deg, #e6d2ab, #d4a5a5); }
-.rbc-show-more { color: #c9a96e; background: transparent; }
+.rbc-event:focus {
+  outline: 2px solid #e6d2ab;
+}
+.rbc-event.rbc-selected {
+  background: linear-gradient(135deg, #e6d2ab, #d4a5a5);
+}
+.rbc-show-more {
+  color: #c9a96e;
+  background: transparent;
+}
 
-.rbc-off-range-bg { background-color: rgba(0,0,0,0.35); }
-.rbc-date-cell { padding: 0.4rem; font-size: 0.8rem; color: #cfc6ba; }
-.rbc-date-cell.rbc-now { color: #e6d2ab; font-weight: 700; }
-.rbc-button-link { color: inherit; }
+.rbc-off-range-bg {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+.rbc-date-cell {
+  padding: 0.4rem;
+  font-size: 0.8rem;
+  color: #cfc6ba;
+}
+.rbc-date-cell.rbc-now {
+  color: #e6d2ab;
+  font-weight: 700;
+}
+.rbc-button-link {
+  color: inherit;
+}
 
 @keyframes ripple {
-  from { transform: translate(-50%, -50%) scale(0); opacity: 0.5; }
-  to { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
 }

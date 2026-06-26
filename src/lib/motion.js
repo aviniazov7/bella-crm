@@ -19,7 +19,12 @@ export const staggerItem = {
 
 export const modalSpring = {
   initial: { opacity: 0, scale: 0.94, y: 16 },
-  animate: { opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 320, damping: 26 } },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { type: 'spring', stiffness: 320, damping: 26 },
+  },
   exit: { opacity: 0, scale: 0.96, y: 8, transition: { duration: 0.18 } },
 }
 

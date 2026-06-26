@@ -4,8 +4,7 @@ import { Loader2 } from 'lucide-react'
 import { cn } from '../../lib/cn'
 
 const VARIANTS = {
-  primary:
-    'bg-gold-gradient text-ink shadow-gold hover:shadow-soft-lg disabled:opacity-60',
+  primary: 'bg-gold-gradient text-ink shadow-gold hover:shadow-soft-lg disabled:opacity-60',
   secondary:
     'bg-white/[0.04] text-cream border border-line hover:bg-white/[0.07] hover:border-ink-400',
   danger: 'bg-rose-deep text-ink hover:bg-rose disabled:opacity-60',

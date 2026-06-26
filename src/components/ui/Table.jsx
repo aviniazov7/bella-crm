@@ -3,7 +3,14 @@ import { cn } from '../../lib/cn'
 import { EmptyState } from './EmptyState'
 
 /** Data table with animated rows, hover states + skeleton loading. */
-export function Table({ columns, data, loading, emptyMessage = 'אין נתונים', emptyState, onRowClick }) {
+export function Table({
+  columns,
+  data,
+  loading,
+  emptyMessage = 'אין נתונים',
+  emptyState,
+  onRowClick,
+}) {
   if (loading) {
     return (
       <div className="overflow-hidden rounded-2xl">

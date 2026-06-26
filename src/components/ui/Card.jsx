@@ -5,7 +5,11 @@ import { cn } from '../../lib/cn'
 export function Card({ children, className = '', hover = false, ...rest }) {
   return (
     <motion.div
-      whileHover={hover ? { y: -3, boxShadow: '0 1px 0 rgba(255,255,255,0.04), 0 28px 70px rgba(0,0,0,0.55)' } : {}}
+      whileHover={
+        hover
+          ? { y: -3, boxShadow: '0 1px 0 rgba(255,255,255,0.04), 0 28px 70px rgba(0,0,0,0.55)' }
+          : {}
+      }
       transition={{ type: 'spring', stiffness: 300, damping: 24 }}
       className={cn(
         'rounded-2xl border border-line bg-surface p-6 shadow-soft backdrop-blur-xl',

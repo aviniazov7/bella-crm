@@ -24,7 +24,8 @@ export function toCalendarEvents(appointments) {
     const end = new Date(start.getTime() + (Number(appt.duration) || 60) * 60000)
     return {
       id: appt.id,
-      title: `${appt.client_name || appt.clientName || 'לקוח'} · ${appt.service_type || appt.serviceType || ''}`.trim(),
+      title:
+        `${appt.client_name || appt.clientName || 'לקוח'} · ${appt.service_type || appt.serviceType || ''}`.trim(),
       start,
       end,
       resource: appt,

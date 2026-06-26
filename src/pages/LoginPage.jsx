@@ -33,7 +33,10 @@ export function LoginPage() {
   }
 
   return (
-    <div dir="rtl" className="relative flex min-h-screen items-center justify-center overflow-hidden bg-ink px-4">
+    <div
+      dir="rtl"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-ink px-4"
+    >
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-gold/20 blur-[120px]" />
         <div className="absolute -bottom-32 -left-24 h-96 w-96 rounded-full bg-rose/20 blur-[120px]" />

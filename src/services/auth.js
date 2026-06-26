@@ -16,7 +16,9 @@ export async function signOut() {
 }
 
 export function subscribeToAuth(callback) {
-  const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+  const {
+    data: { subscription },
+  } = supabase.auth.onAuthStateChange((_event, session) => {
     callback(session?.user ?? null)
   })
   // Fire immediately with current session
@@ -28,10 +30,10 @@ export function subscribeToAuth(callback) {
 
 export function authErrorMessage(code) {
   const map = {
-    'invalid_credentials': 'פרטי התחברות שגויים',
-    'email_not_confirmed': 'האימייל לא אומת',
-    'user_not_found': 'משתמש לא נמצא',
-    'too_many_requests': 'יותר מדי ניסיונות, נסה שוב מאוחר יותר',
+    invalid_credentials: 'פרטי התחברות שגויים',
+    email_not_confirmed: 'האימייל לא אומת',
+    user_not_found: 'משתמש לא נמצא',
+    too_many_requests: 'יותר מדי ניסיונות, נסה שוב מאוחר יותר',
     'auth/invalid-email': 'כתובת אימייל לא תקינה',
     'auth/user-disabled': 'המשתמש חסום',
     'auth/user-not-found': 'משתמש לא נמצא',

@@ -1,7 +1,16 @@
 import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
-  LayoutDashboard, Users, CalendarDays, CreditCard, Images, BellRing, LogOut, Menu, X, Sparkles,
+  LayoutDashboard,
+  Users,
+  CalendarDays,
+  CreditCard,
+  Images,
+  BellRing,
+  LogOut,
+  Menu,
+  X,
+  Sparkles,
 } from 'lucide-react'
 import { signOut } from '../services/auth'
 import { useUiStore } from '../store/uiStore'
@@ -23,7 +32,11 @@ function NavItems({ onNavigate }) {
       {NAV_ITEMS.map((item) => {
         const Icon = item.icon
         return (
-          <NavLink key={item.to} to={item.to} end={item.end} onClick={onNavigate}
+          <NavLink
+            key={item.to}
+            to={item.to}
+            end={item.end}
+            onClick={onNavigate}
             className={({ isActive }) =>
               cn(
                 'group relative flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-colors',
@@ -34,15 +47,24 @@ function NavItems({ onNavigate }) {
             {({ isActive }) => (
               <>
                 {isActive && (
-                  <motion.span layoutId="nav-active"
+                  <motion.span
+                    layoutId="nav-active"
                     className="absolute inset-0 rounded-xl bg-white/[0.05]"
-                    transition={{ type: 'spring', stiffness: 400, damping: 32 }} />
+                    transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                  />
                 )}
                 {isActive && (
-                  <motion.span layoutId="nav-bar"
-                    className="absolute right-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full bg-gold-gradient" />
+                  <motion.span
+                    layoutId="nav-bar"
+                    className="absolute right-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full bg-gold-gradient"
+                  />
                 )}
-                <Icon className={cn('relative z-10 h-[18px] w-[18px] transition-colors', isActive ? 'text-gold' : 'text-muted group-hover:text-cream')} />
+                <Icon
+                  className={cn(
+                    'relative z-10 h-[18px] w-[18px] transition-colors',
+                    isActive ? 'text-gold' : 'text-muted group-hover:text-cream'
+                  )}
+                />
                 <span className="relative z-10">{item.label}</span>
               </>
             )}
@@ -97,8 +119,10 @@ export function Layout() {
         <Brand />
         <NavItems onNavigate={closeSidebar} />
         <div className="absolute inset-x-4 bottom-4">
-          <button onClick={handleSignOut}
-            className="flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-rose-deep/10 hover:text-rose">
+          <button
+            onClick={handleSignOut}
+            className="flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-rose-deep/10 hover:text-rose"
+          >
             <LogOut className="h-[18px] w-[18px]" />
             התנתקות
           </button>
@@ -107,17 +131,24 @@ export function Layout() {
 
       <AnimatePresence>
         {sidebarOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm md:hidden"
-            onClick={closeSidebar} aria-hidden="true" />
+            onClick={closeSidebar}
+            aria-hidden="true"
+          />
         )}
       </AnimatePresence>
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-20 flex items-center justify-between border-b border-line bg-ink/70 px-4 py-3 backdrop-blur-xl md:px-8">
-          <button onClick={toggleSidebar}
+          <button
+            onClick={toggleSidebar}
             className="rounded-lg p-2 text-muted transition-colors hover:bg-white/5 hover:text-cream md:hidden"
-            aria-label="תפריט">
+            aria-label="תפריט"
+          >
             {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
           <div className="flex-1" />
@@ -125,9 +156,13 @@ export function Layout() {
 
         <main className="flex-1 px-4 py-6 md:px-10 md:py-9">
           <AnimatePresence mode="wait">
-            <motion.div key={location.pathname}
-              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}>
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            >
               <Outlet />
             </motion.div>
           </AnimatePresence>

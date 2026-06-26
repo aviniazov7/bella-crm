@@ -15,7 +15,7 @@ vi.mock('../../services/supabase', () => ({
       signOut: authMocks.signOut,
       onAuthStateChange: authMocks.onAuthStateChange,
       getSession: authMocks.getSession,
-    }
+    },
   },
 }))
 
@@ -36,7 +36,10 @@ describe('signIn', () => {
   })
 
   it('throws on error', async () => {
-    authMocks.signInWithPassword.mockResolvedValue({ data: null, error: { message: 'Invalid credentials', code: 'invalid_credentials' } })
+    authMocks.signInWithPassword.mockResolvedValue({
+      data: null,
+      error: { message: 'Invalid credentials', code: 'invalid_credentials' },
+    })
     await expect(signIn('a@b.com', 'wrong')).rejects.toBeTruthy()
   })
 })

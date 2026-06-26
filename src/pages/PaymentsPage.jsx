@@ -70,8 +70,18 @@ export function PaymentsPage() {
       header: 'סכום',
       render: (r) => <span className="font-medium text-gold">{formatCurrency(r.amount)}</span>,
     },
-    { key: 'date', header: 'תאריך', render: (r) => <span className="text-cream/70">{formatDate(r.date)}</span> },
-    { key: 'method', header: 'אמצעי', render: (r) => <span className="text-cream/70">{PAYMENT_METHOD_LABELS[r.method] || r.method}</span> },
+    {
+      key: 'date',
+      header: 'תאריך',
+      render: (r) => <span className="text-cream/70">{formatDate(r.date)}</span>,
+    },
+    {
+      key: 'method',
+      header: 'אמצעי',
+      render: (r) => (
+        <span className="text-cream/70">{PAYMENT_METHOD_LABELS[r.method] || r.method}</span>
+      ),
+    },
     {
       key: 'status',
       header: 'סטטוס',
@@ -88,8 +98,12 @@ export function PaymentsPage() {
       cellClassName: 'w-px whitespace-nowrap',
       render: (r) => (
         <div className="flex gap-2">
-          <Button size="sm" variant="ghost" onClick={() => setEditing(r)}>עריכה</Button>
-          <Button size="sm" variant="ghost" onClick={() => setDeleting(r)}>מחיקה</Button>
+          <Button size="sm" variant="ghost" onClick={() => setEditing(r)}>
+            עריכה
+          </Button>
+          <Button size="sm" variant="ghost" onClick={() => setDeleting(r)}>
+            מחיקה
+          </Button>
         </div>
       ),
     },
@@ -99,19 +113,34 @@ export function PaymentsPage() {
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="font-serif text-3xl font-bold text-cream">תשלומים</h1>
-        <Button onClick={() => setEditing({})}><Plus className="h-4 w-4" /> תשלום חדש</Button>
+        <Button onClick={() => setEditing({})}>
+          <Plus className="h-4 w-4" /> תשלום חדש
+        </Button>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <StatCard label="סך הכנסות (מסונן)" value={formatCurrency(total)} icon={<Wallet className="h-5 w-5" />} accent="gold" />
-        <StatCard label="מספר תשלומים" value={filtered.length} icon={<Receipt className="h-5 w-5" />} accent="neutral" />
+        <StatCard
+          label="סך הכנסות (מסונן)"
+          value={formatCurrency(total)}
+          icon={<Wallet className="h-5 w-5" />}
+          accent="gold"
+        />
+        <StatCard
+          label="מספר תשלומים"
+          value={filtered.length}
+          icon={<Receipt className="h-5 w-5" />}
+          accent="neutral"
+        />
       </div>
 
       <div className="max-w-xs">
         <Select
           label="סינון לפי סטטוס"
           placeholder="כל הסטטוסים"
-          options={Object.entries(PAYMENT_STATUS_LABELS).map(([value, label]) => ({ value, label }))}
+          options={Object.entries(PAYMENT_STATUS_LABELS).map(([value, label]) => ({
+            value,
+            label,
+          }))}
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
         />
@@ -126,10 +155,19 @@ export function PaymentsPage() {
             <EmptyState
               icon={<Receipt className="h-7 w-7" />}
               title={statusFilter ? 'אין תשלומים בסטטוס זה' : 'עדיין אין תשלומים'}
-              description={statusFilter ? 'נסי לבחור סטטוס אחר בסינון.' : 'התשלומים שתתעדי יופיעו כאן עם סיכום הכנסות.'}
-              action={!statusFilter && (
-                <Button size="sm" onClick={() => setEditing({})}><Plus className="h-4 w-4" />הוסף תשלום ראשון</Button>
-              )}
+              description={
+                statusFilter
+                  ? 'נסי לבחור סטטוס אחר בסינון.'
+                  : 'התשלומים שתתעדי יופיעו כאן עם סיכום הכנסות.'
+              }
+              action={
+                !statusFilter && (
+                  <Button size="sm" onClick={() => setEditing({})}>
+                    <Plus className="h-4 w-4" />
+                    הוסף תשלום ראשון
+                  </Button>
+                )
+              }
             />
           }
         />

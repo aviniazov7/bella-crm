@@ -78,7 +78,9 @@ export function CalendarPage() {
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="font-serif text-3xl font-bold text-cream">יומן תורים</h1>
-        <Button onClick={() => setEditing({})}><Plus className="h-4 w-4" /> תור חדש</Button>
+        <Button onClick={() => setEditing({})}>
+          <Plus className="h-4 w-4" /> תור חדש
+        </Button>
       </div>
 
       <Card className="h-[72vh] p-3 sm:p-5">

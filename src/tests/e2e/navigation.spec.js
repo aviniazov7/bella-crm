@@ -12,7 +12,7 @@ test.describe('Auth guard & navigation', () => {
     test(`redirects ${route} to /login when unauthenticated`, async ({ page }) => {
       await page.goto(route)
       await expect(page).toHaveURL(/\/login$/)
-      await expect(page.getByRole('button', { name: 'התחברות' })).toBeVisible()
+      await expect(page.getByRole('button', { name: 'כניסה' })).toBeVisible()
     })
   }
 

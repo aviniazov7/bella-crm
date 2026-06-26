@@ -15,11 +15,11 @@ test.describe('Login page', () => {
     await expect(page.getByRole('heading', { name: 'Bella CRM' })).toBeVisible()
     await expect(page.getByLabel('אימייל')).toBeVisible()
     await expect(page.getByLabel('סיסמה')).toBeVisible()
-    await expect(page.getByRole('button', { name: 'התחברות' })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'כניסה' })).toBeVisible()
   })
 
   test('shows validation errors when submitting empty', async ({ page }) => {
-    await page.getByRole('button', { name: 'התחברות' }).click()
+    await page.getByRole('button', { name: 'כניסה' }).click()
     await expect(page.getByText('שדה חובה').first()).toBeVisible()
   })
 

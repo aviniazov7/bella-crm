@@ -40,7 +40,7 @@ export function Modal({ open, onClose, title, children, footer, size = 'md' }) {
             role="dialog"
             aria-modal="true"
             className={cn(
-              'relative z-10 w-full overflow-hidden rounded-2xl border border-white/10 bg-ink-100/95 shadow-glow-lg backdrop-blur-2xl',
+              'relative z-10 w-full overflow-hidden rounded-2xl border border-white/10 bg-ink-100/95 shadow-soft-lg backdrop-blur-2xl',
               SIZES[size]
             )}
             initial={{ opacity: 0, scale: 0.94, y: 16 }}

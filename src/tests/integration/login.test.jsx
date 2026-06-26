@@ -23,7 +23,7 @@ describe('Login flow', () => {
 
     await user.type(screen.getByLabelText('אימייל'), 'owner@bella.com')
     await user.type(screen.getByLabelText('סיסמה'), 'secret123')
-    await user.click(screen.getByRole('button', { name: 'התחברות' }))
+    await user.click(screen.getByRole('button', { name: 'כניסה' }))
 
     await waitFor(() =>
       expect(authMocks.signIn).toHaveBeenCalledWith('owner@bella.com', 'secret123')
@@ -37,7 +37,7 @@ describe('Login flow', () => {
 
     await user.type(screen.getByLabelText('אימייל'), 'owner@bella.com')
     await user.type(screen.getByLabelText('סיסמה'), 'wrong')
-    await user.click(screen.getByRole('button', { name: 'התחברות' }))
+    await user.click(screen.getByRole('button', { name: 'כניסה' }))
 
     expect(await screen.findByRole('alert')).toHaveTextContent('פרטי התחברות שגויים')
   })
@@ -45,7 +45,7 @@ describe('Login flow', () => {
   it('validates required fields', async () => {
     const user = userEvent.setup()
     renderWithProviders(<LoginPage />)
-    await user.click(screen.getByRole('button', { name: 'התחברות' }))
+    await user.click(screen.getByRole('button', { name: 'כניסה' }))
     expect(await screen.findAllByText('שדה חובה')).not.toHaveLength(0)
     expect(authMocks.signIn).not.toHaveBeenCalled()
   })

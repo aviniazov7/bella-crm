@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Sparkles, Mail, Lock } from 'lucide-react'
+import { Sparkles } from 'lucide-react'
 import { signIn, authErrorMessage } from '../services/auth'
 import { Input } from '../components/ui/Input'
 import { Button } from '../components/ui/Button'
@@ -44,7 +44,7 @@ export function LoginPage() {
         initial={{ opacity: 0, y: 24, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 w-full max-w-md rounded-3xl border border-white/10 bg-white/[0.04] p-8 shadow-glow-lg backdrop-blur-2xl sm:p-10"
+        className="relative z-10 w-full max-w-md rounded-3xl border border-white/10 bg-white/[0.04] p-8 shadow-soft-lg backdrop-blur-2xl sm:p-10"
       >
         <div className="mb-8 text-center">
           <motion.div

@@ -27,7 +27,7 @@ function CountUp({ value }) {
       },
     })
     return () => controls.stop()
-  }, [target]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [target])
 
   return <span>{display}</span>
 }

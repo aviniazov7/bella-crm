@@ -44,7 +44,7 @@ describe('Photos upload', () => {
     renderWithProviders(<PhotosPage />)
     await screen.findByText('עדיין אין תמונות בגלריה')
 
-    await user.click(screen.getByRole('button', { name: '+ העלאת תמונות' }))
+    await user.click(screen.getByRole('button', { name: 'העלאת תמונות' }))
     const dialog = await screen.findByRole('dialog')
 
     await user.selectOptions(within(dialog).getByLabelText('לקוח'), 'c1')

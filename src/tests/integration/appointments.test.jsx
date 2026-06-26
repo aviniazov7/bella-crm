@@ -35,13 +35,13 @@ beforeEach(() => {
 describe('Calendar / appointments', () => {
   it('renders the calendar with a new-appointment button', async () => {
     renderWithProviders(<CalendarPage />)
-    expect(await screen.findByRole('button', { name: '+ תור חדש' })).toBeInTheDocument()
+    expect(await screen.findByRole('button', { name: 'תור חדש' })).toBeInTheDocument()
   })
 
   it('creates an appointment through the form', async () => {
     const user = userEvent.setup()
     renderWithProviders(<CalendarPage />)
-    await user.click(await screen.findByRole('button', { name: '+ תור חדש' }))
+    await user.click(await screen.findByRole('button', { name: 'תור חדש' }))
 
     const dialog = await screen.findByRole('dialog')
     await user.selectOptions(within(dialog).getByLabelText('לקוח'), 'c1')

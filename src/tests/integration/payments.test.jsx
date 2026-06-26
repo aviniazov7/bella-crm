@@ -50,7 +50,7 @@ describe('Payments page', () => {
     renderWithProviders(<PaymentsPage />)
     await screen.findByText('בלה כהן')
 
-    await user.click(screen.getByRole('button', { name: '+ תשלום חדש' }))
+    await user.click(screen.getByRole('button', { name: 'תשלום חדש' }))
     const dialog = await screen.findByRole('dialog')
 
     await user.selectOptions(within(dialog).getByLabelText('לקוח'), 'c1')

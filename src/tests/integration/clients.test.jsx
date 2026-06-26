@@ -57,7 +57,7 @@ describe('Clients CRUD', () => {
     renderWithProviders(<ClientsPage />)
     await screen.findByText('בלה כהן')
 
-    await user.click(screen.getByRole('button', { name: '+ לקוח חדש' }))
+    await user.click(screen.getByRole('button', { name: 'לקוח חדש' }))
     const dialog = await screen.findByRole('dialog')
     await user.type(within(dialog).getByLabelText('שם מלא'), 'מאיה רז')
     await user.type(within(dialog).getByLabelText('טלפון'), '0541234567')
@@ -79,7 +79,7 @@ describe('Clients CRUD', () => {
     await user.click(deleteButtons[0])
 
     const dialog = await screen.findByRole('dialog')
-    await user.click(within(dialog).getByRole('button', { name: 'מחק' }))
+    await user.click(within(dialog).getByRole('button', { name: 'מחיקה' }))
 
     await waitFor(() => expect(svc.remove).toHaveBeenCalled())
   })

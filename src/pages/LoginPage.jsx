@@ -59,7 +59,7 @@ export function LoginPage() {
             <Sparkles className="h-8 w-8" />
           </motion.div>
           <h1 className="font-serif text-4xl font-bold gradient-text">Bella CRM</h1>
-          <p className="mt-2 text-sm tracking-wide text-cream/50">ניהול מכון יופי יוקרתי</p>
+          <p className="mt-2 text-sm tracking-wide text-cream/80">ניהול מכון יופי יוקרתי</p>
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">

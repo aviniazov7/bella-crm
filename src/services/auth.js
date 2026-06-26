@@ -1,38 +1,37 @@
 /**
- * Authentication service — thin wrapper around Firebase Auth.
+ * Authentication service — thin wrapper around Supabase Auth.
  * Bella CRM is a single-operator app, so we only need email/password sign-in.
  */
-import { signInWithEmailAndPassword, signOut as fbSignOut, onAuthStateChanged } from 'firebase/auth'
-import { auth } from './firebase'
+import { supabase } from './supabase'
 
-/**
- * Sign in with email + password.
- * @param {string} email
- * @param {string} password
- * @returns {Promise<import('firebase/auth').User>}
- */
 export async function signIn(email, password) {
-  const credential = await signInWithEmailAndPassword(auth, email, password)
-  return credential.user
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+  if (error) throw error
+  return data.user
 }
 
-/** Sign the current user out. */
-export function signOut() {
-  return fbSignOut(auth)
+export async function signOut() {
+  const { error } = await supabase.auth.signOut()
+  if (error) throw error
 }
 
-/**
- * Subscribe to auth state changes.
- * @param {(user: import('firebase/auth').User | null) => void} callback
- * @returns {() => void} unsubscribe function
- */
 export function subscribeToAuth(callback) {
-  return onAuthStateChanged(auth, callback)
+  const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    callback(session?.user ?? null)
+  })
+  // Fire immediately with current session
+  supabase.auth.getSession().then(({ data: { session } }) => {
+    callback(session?.user ?? null)
+  })
+  return () => subscription.unsubscribe()
 }
 
-/** Map a Firebase auth error code to a human-friendly message. */
 export function authErrorMessage(code) {
   const map = {
+    'invalid_credentials': 'פרטי התחברות שגויים',
+    'email_not_confirmed': 'האימייל לא אומת',
+    'user_not_found': 'משתמש לא נמצא',
+    'too_many_requests': 'יותר מדי ניסיונות, נסה שוב מאוחר יותר',
     'auth/invalid-email': 'כתובת אימייל לא תקינה',
     'auth/user-disabled': 'המשתמש חסום',
     'auth/user-not-found': 'משתמש לא נמצא',

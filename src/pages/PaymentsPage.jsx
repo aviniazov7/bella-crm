@@ -1,14 +1,17 @@
 import { useMemo, useState } from 'react'
+import { Plus, Wallet, Receipt } from 'lucide-react'
 import { useCollection } from '../hooks/useCollection'
 import { useToast } from '../hooks/useToast'
 import { paymentsService, totalRevenue } from '../services/payments'
 import { clientsService } from '../services/clients'
 import { Button } from '../components/ui/Button'
 import { Select } from '../components/ui/Select'
+import { Card } from '../components/ui/Card'
 import { Table } from '../components/ui/Table'
 import { Modal } from '../components/ui/Modal'
 import { Badge } from '../components/ui/Badge'
 import { StatCard } from '../components/ui/StatCard'
+import { EmptyState } from '../components/ui/EmptyState'
 import { ConfirmDialog } from '../components/ui/ConfirmDialog'
 import { PaymentForm } from '../components/payments/PaymentForm'
 import { formatCurrency, formatDate } from '../utils/format'
@@ -67,8 +70,8 @@ export function PaymentsPage() {
       header: 'סכום',
       render: (r) => <span className="font-medium text-gold">{formatCurrency(r.amount)}</span>,
     },
-    { key: 'date', header: 'תאריך', render: (r) => formatDate(r.date) },
-    { key: 'method', header: 'אמצעי', render: (r) => PAYMENT_METHOD_LABELS[r.method] || r.method },
+    { key: 'date', header: 'תאריך', render: (r) => <span className="text-cream/70">{formatDate(r.date)}</span> },
+    { key: 'method', header: 'אמצעי', render: (r) => <span className="text-cream/70">{PAYMENT_METHOD_LABELS[r.method] || r.method}</span> },
     {
       key: 'status',
       header: 'סטטוס',
@@ -81,14 +84,12 @@ export function PaymentsPage() {
     {
       key: 'actions',
       header: 'פעולות',
+      className: 'w-px whitespace-nowrap',
+      cellClassName: 'w-px whitespace-nowrap',
       render: (r) => (
         <div className="flex gap-2">
-          <Button size="sm" variant="ghost" onClick={() => setEditing(r)}>
-            עריכה
-          </Button>
-          <Button size="sm" variant="ghost" onClick={() => setDeleting(r)}>
-            מחיקה
-          </Button>
+          <Button size="sm" variant="ghost" onClick={() => setEditing(r)}>עריכה</Button>
+          <Button size="sm" variant="ghost" onClick={() => setDeleting(r)}>מחיקה</Button>
         </div>
       ),
     },
@@ -97,34 +98,42 @@ export function PaymentsPage() {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold text-rose-soft">תשלומים</h1>
-        <Button onClick={() => setEditing({})}>+ תשלום חדש</Button>
+        <h1 className="font-serif text-3xl font-bold text-cream">תשלומים</h1>
+        <Button onClick={() => setEditing({})}><Plus className="h-4 w-4" /> תשלום חדש</Button>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <StatCard label="סך הכנסות (מסונן)" value={formatCurrency(total)} icon="💰" />
-        <StatCard label="מספר תשלומים" value={filtered.length} icon="🧾" accent="rose" />
+        <StatCard label="סך הכנסות (מסונן)" value={formatCurrency(total)} icon={<Wallet className="h-5 w-5" />} accent="gold" />
+        <StatCard label="מספר תשלומים" value={filtered.length} icon={<Receipt className="h-5 w-5" />} accent="neutral" />
       </div>
 
       <div className="max-w-xs">
         <Select
           label="סינון לפי סטטוס"
           placeholder="כל הסטטוסים"
-          options={Object.entries(PAYMENT_STATUS_LABELS).map(([value, label]) => ({
-            value,
-            label,
-          }))}
+          options={Object.entries(PAYMENT_STATUS_LABELS).map(([value, label]) => ({ value, label }))}
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
         />
       </div>
 
-      <Table
-        columns={columns}
-        data={filtered}
-        loading={payments.isLoading}
-        emptyMessage="אין תשלומים"
-      />
+      <Card className="overflow-hidden p-0">
+        <Table
+          columns={columns}
+          data={filtered}
+          loading={payments.isLoading}
+          emptyState={
+            <EmptyState
+              icon={<Receipt className="h-7 w-7" />}
+              title={statusFilter ? 'אין תשלומים בסטטוס זה' : 'עדיין אין תשלומים'}
+              description={statusFilter ? 'נסי לבחור סטטוס אחר בסינון.' : 'התשלומים שתתעדי יופיעו כאן עם סיכום הכנסות.'}
+              action={!statusFilter && (
+                <Button size="sm" onClick={() => setEditing({})}><Plus className="h-4 w-4" />הוסף תשלום ראשון</Button>
+              )}
+            />
+          }
+        />
+      </Card>
 
       <Modal
         open={editing !== null}
@@ -147,8 +156,8 @@ export function PaymentsPage() {
         onClose={() => setDeleting(null)}
         onConfirm={handleDelete}
         title="מחיקת תשלום"
-        message="למחוק את התשלום?"
-        confirmLabel="מחק"
+        message="האם למחוק את התשלום?"
+        confirmLabel="מחיקה"
         loading={payments.isMutating}
       />
     </div>

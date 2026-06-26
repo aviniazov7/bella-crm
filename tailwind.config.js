@@ -4,30 +4,47 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Bella CRM brand palette — dark base, pink + gold accents
         ink: {
-          DEFAULT: '#0f0f0f',
-          50: '#1a1a1a',
-          100: '#202020',
-          200: '#2a2a2a',
-          300: '#363636',
+          DEFAULT: '#0a0a0a',
+          50: '#141414',
+          100: '#1a1a1a',
+          200: '#242424',
+          300: '#2e2e2e',
+          400: '#3a3a3a',
         },
-        rose: {
-          DEFAULT: '#d4a5a5',
-          soft: '#e0bcbc',
-          deep: '#b98787',
-        },
-        gold: {
-          DEFAULT: '#c9a96e',
-          soft: '#dcc39a',
-          deep: '#a98c54',
-        },
+        surface: '#0f0f0f',
+        line: '#1f1f1f',
+        muted: '#a0a0a0',
+        rose: { DEFAULT: '#d4a5a5', soft: '#f3e4e4', deep: '#b98787' },
+        gold: { DEFAULT: '#c9a96e', soft: '#e6d2ab', deep: '#a98c54' },
+        cream: '#f5efe6',
+        positive: '#7fb88a',
+        negative: '#cf8b8b',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'Arial', 'sans-serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
       },
       boxShadow: {
-        glow: '0 0 0 1px rgba(201,169,110,0.15), 0 8px 30px rgba(0,0,0,0.5)',
+        soft: '0 1px 0 rgba(255,255,255,0.02), 0 12px 40px rgba(0,0,0,0.45)',
+        'soft-lg': '0 1px 0 rgba(255,255,255,0.03), 0 28px 70px rgba(0,0,0,0.55)',
+        glow: '0 0 0 1px rgba(201,169,110,0.10), 0 10px 40px rgba(0,0,0,0.5)',
+        gold: '0 6px 24px rgba(201,169,110,0.20)',
+      },
+      backgroundImage: {
+        'gold-gradient': 'linear-gradient(135deg, #e6d2ab 0%, #c9a96e 50%, #a98c54 100%)',
+        'rose-gradient': 'linear-gradient(135deg, #f3e4e4 0%, #d4a5a5 50%, #b98787 100%)',
+        'champagne-text': 'linear-gradient(100deg, #e6d2ab 0%, #c9a96e 45%, #d4a5a5 100%)',
+      },
+      keyframes: {
+        'fade-in': { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+        shimmer: { '100%': { transform: 'translateX(100%)' } },
+        float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+      },
+      animation: {
+        'fade-in': 'fade-in 0.4s ease-out',
+        shimmer: 'shimmer 1.6s infinite',
+        float: 'float 9s ease-in-out infinite',
       },
     },
   },

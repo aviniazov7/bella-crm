@@ -2,12 +2,14 @@ import { useMemo, useState } from 'react'
 import { Calendar, dateFnsLocalizer } from 'react-big-calendar'
 import { format, parse, startOfWeek, getDay } from 'date-fns'
 import { he } from 'date-fns/locale'
+import { Plus } from 'lucide-react'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { useCollection } from '../hooks/useCollection'
 import { appointmentsService, toCalendarEvents } from '../services/appointments'
 import { clientsService } from '../services/clients'
 import { useToast } from '../hooks/useToast'
 import { Button } from '../components/ui/Button'
+import { Card } from '../components/ui/Card'
 import { Modal } from '../components/ui/Modal'
 import { Spinner } from '../components/ui/Spinner'
 import { AppointmentForm } from '../components/calendar/AppointmentForm'
@@ -34,6 +36,10 @@ const messages = {
   event: 'אירוע',
   noEventsInRange: 'אין תורים בטווח זה',
 }
+
+const MIN_TIME = new Date(1970, 0, 1, 7, 0, 0)
+const MAX_TIME = new Date(1970, 0, 1, 21, 0, 0)
+const SCROLL_TO = new Date(1970, 0, 1, 8, 0, 0)
 
 /** Appointment calendar with month/week/day views. */
 export function CalendarPage() {
@@ -71,11 +77,11 @@ export function CalendarPage() {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold text-rose-soft">יומן תורים</h1>
-        <Button onClick={() => setEditing({})}>+ תור חדש</Button>
+        <h1 className="font-serif text-3xl font-bold text-cream">יומן תורים</h1>
+        <Button onClick={() => setEditing({})}><Plus className="h-4 w-4" /> תור חדש</Button>
       </div>
 
-      <div className="card h-[70vh] p-2 sm:p-4">
+      <Card className="h-[72vh] p-3 sm:p-5">
         <Calendar
           localizer={localizer}
           culture="he"
@@ -86,12 +92,17 @@ export function CalendarPage() {
           endAccessor="end"
           views={['month', 'week', 'day', 'agenda']}
           defaultView="week"
+          min={MIN_TIME}
+          max={MAX_TIME}
+          scrollToTime={SCROLL_TO}
+          step={30}
+          timeslots={2}
           selectable
           onSelectSlot={handleSelectSlot}
           onSelectEvent={(ev) => setEditing(ev.resource)}
           style={{ height: '100%' }}
         />
-      </div>
+      </Card>
 
       <Modal
         open={editing !== null}

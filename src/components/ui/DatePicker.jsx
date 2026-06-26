@@ -1,18 +1,16 @@
 import { forwardRef } from 'react'
+import { cn } from '../../lib/cn'
 
-/**
- * DatePicker — a thin wrapper over the native date/time input so it inherits the
- * brand styling while staying fully accessible and keyboard-friendly.
- */
+/** Thin brand-styled wrapper over the native date/time input. */
 export const DatePicker = forwardRef(function DatePicker(
   { label, error, id, type = 'date', className = '', ...rest },
   ref
 ) {
   const inputId = id || rest.name
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1.5">
       {label && (
-        <label htmlFor={inputId} className="text-xs font-medium text-rose">
+        <label htmlFor={inputId} className="text-sm font-medium text-cream/80">
           {label}
         </label>
       )}
@@ -20,8 +18,7 @@ export const DatePicker = forwardRef(function DatePicker(
         id={inputId}
         ref={ref}
         type={type}
-        aria-invalid={!!error}
-        className={`input-base [color-scheme:dark] ${error ? 'border-rose-deep' : ''} ${className}`}
+        className={cn('input-base [color-scheme:dark]', error && 'border-rose-deep/60', className)}
         {...rest}
       />
       {error && <span className="text-xs text-rose-deep">{error}</span>}

@@ -1,17 +1,24 @@
-/** Reusable button with brand variants. */
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { Loader2 } from 'lucide-react'
+import { cn } from '../../lib/cn'
+
 const VARIANTS = {
-  primary: 'bg-gold text-ink hover:bg-gold-soft disabled:bg-gold-deep',
-  secondary: 'bg-ink-200 text-rose-soft hover:bg-ink-300 border border-ink-300',
+  primary:
+    'bg-gold-gradient text-ink shadow-gold hover:shadow-soft-lg disabled:opacity-60',
+  secondary:
+    'bg-white/[0.04] text-cream border border-line hover:bg-white/[0.07] hover:border-ink-400',
   danger: 'bg-rose-deep text-ink hover:bg-rose disabled:opacity-60',
-  ghost: 'bg-transparent text-rose-soft hover:bg-ink-100',
+  ghost: 'bg-transparent text-cream/80 hover:bg-white/[0.05] hover:text-cream',
 }
 
 const SIZES = {
-  sm: 'px-3 py-1.5 text-xs',
-  md: 'px-4 py-2 text-sm',
-  lg: 'px-6 py-3 text-base',
+  sm: 'px-3.5 py-1.5 text-xs',
+  md: 'px-5 py-2.5 text-sm',
+  lg: 'px-7 py-3 text-base',
 }
 
+/** Reusable button with brand variants, ripple + motion. */
 export function Button({
   children,
   variant = 'primary',
@@ -20,25 +27,46 @@ export function Button({
   className = '',
   loading = false,
   disabled = false,
+  onClick,
   ...rest
 }) {
+  const [ripples, setRipples] = useState([])
+
+  const handleClick = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const id = Date.now()
+    setRipples((r) => [...r, { id, x: e.clientX - rect.left, y: e.clientY - rect.top }])
+    setTimeout(() => setRipples((r) => r.filter((p) => p.id !== id)), 600)
+    onClick?.(e)
+  }
+
   return (
-    <button
+    <motion.button
       type={type}
       disabled={disabled || loading}
-      className={`inline-flex items-center justify-center gap-2 rounded-lg font-medium
-        transition-colors focus:outline-none focus:ring-2 focus:ring-gold/50
-        disabled:cursor-not-allowed ${VARIANTS[variant]} ${SIZES[size]} ${className}`}
+      onClick={handleClick}
+      whileHover={disabled || loading ? {} : { y: -2, scale: 1.015 }}
+      whileTap={disabled || loading ? {} : { scale: 0.97 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 22 }}
+      className={cn(
+        'relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-xl font-medium',
+        'transition-colors focus:outline-none focus:ring-2 focus:ring-gold/40 disabled:cursor-not-allowed',
+        VARIANTS[variant],
+        SIZES[size],
+        className
+      )}
       {...rest}
     >
-      {loading && (
+      {ripples.map((r) => (
         <span
-          className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
-          aria-hidden="true"
+          key={r.id}
+          className="pointer-events-none absolute h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/25"
+          style={{ left: r.x, top: r.y, animation: 'ripple 0.6s ease-out forwards' }}
         />
-      )}
+      ))}
+      {loading && <Loader2 className="h-4 w-4 animate-spin" />}
       {children}
-    </button>
+    </motion.button>
   )
 }
 

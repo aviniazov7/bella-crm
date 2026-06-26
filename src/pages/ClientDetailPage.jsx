@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { ArrowRight, Phone, Mail, Cake, ImageIcon } from 'lucide-react'
 import { useParams, Link } from 'react-router-dom'
 import { clientsService } from '../services/clients'
 import { appointmentsService } from '../services/appointments'
@@ -70,7 +71,7 @@ export function ClientDetailPage() {
   return (
     <div className="flex flex-col gap-6">
       <Link to="/clients" className="text-sm text-gold hover:underline">
-        → חזרה ללקוחות
+        <ArrowRight className="h-4 w-4" /> חזרה ללקוחות
       </Link>
 
       <Card className="flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -80,9 +81,9 @@ export function ClientDetailPage() {
         <div className="flex-1">
           <h1 className="text-2xl font-bold text-rose-soft">{client.name}</h1>
           <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-rose-soft/70">
-            <span>📞 {formatPhone(client.phone)}</span>
-            {client.email && <span>✉ {client.email}</span>}
-            {client.birthdate && <span>🎂 {formatDate(client.birthdate)}</span>}
+            <span className="flex items-center gap-1.5"><Phone className="h-4 w-4 text-gold" /> {formatPhone(client.phone)}</span>
+            {client.email && <span className="flex items-center gap-1.5"><Mail className="h-4 w-4 text-gold" /> {client.email}</span>}
+            {client.birthdate && <span className="flex items-center gap-1.5"><Cake className="h-4 w-4 text-gold" /> {formatDate(client.birthdate)}</span>}
           </div>
         </div>
         <div className="text-left">
@@ -147,7 +148,7 @@ export function ClientDetailPage() {
       <Card>
         <CardHeader title="תמונות לפני / אחרי" />
         {photos.length === 0 ? (
-          <EmptyState message="אין תמונות" icon="🖼" />
+          <EmptyState message="אין תמונות" icon={<ImageIcon className="h-7 w-7" />} />
         ) : (
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
             {photos.map((ph) => (

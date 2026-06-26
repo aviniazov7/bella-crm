@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Plus, BellRing } from 'lucide-react'
 import { useCollection } from '../hooks/useCollection'
 import { useToast } from '../hooks/useToast'
 import { remindersService } from '../services/reminders'
@@ -54,14 +55,19 @@ export function RemindersPage() {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold text-rose-soft">תזכורות</h1>
-        <Button onClick={() => setOpen(true)}>+ תזכורת חדשה</Button>
+        <h1 className="font-serif text-3xl font-bold text-cream">תזכורות</h1>
+        <Button onClick={() => setOpen(true)}><Plus className="h-4 w-4" /> תזכורת חדשה</Button>
       </div>
 
       {reminders.isLoading ? (
         <Spinner size="lg" />
       ) : reminders.items.length === 0 ? (
-        <EmptyState message="אין תזכורות" icon="🔔" />
+        <EmptyState
+          icon={<BellRing className="h-7 w-7" />}
+          title="אין תזכורות פעילות"
+          description="צרי תזכורות למעקב אחר לקוחות, ימי הולדת ותורים חוזרים."
+          action={<Button size="sm" onClick={() => setOpen(true)}><Plus className="h-4 w-4" />הוסף תזכורת ראשונה</Button>}
+        />
       ) : (
         <div className="flex flex-col gap-3">
           {reminders.items.map((r) => (

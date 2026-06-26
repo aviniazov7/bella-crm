@@ -1,16 +1,10 @@
 /**
  * Clients service.
- * Schema: { name, phone, email, birthdate, notes, createdAt, updatedAt }
  */
-import { createCollectionService } from './firestoreCrud'
+import { createCollectionService } from './supabaseCrud'
 
 const base = createCollectionService('clients', { defaultOrderBy: 'name' })
 
-/**
- * Case-insensitive client-side search across name / phone / email.
- * @param {Array} clients
- * @param {string} term
- */
 export function filterClients(clients, term) {
   if (!term) return clients
   const needle = term.trim().toLowerCase()

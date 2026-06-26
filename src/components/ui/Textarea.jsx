@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import { cn } from '../../lib/cn'
 
 /** Labelled textarea with error display. */
 export const Textarea = forwardRef(function Textarea(
@@ -7,9 +8,9 @@ export const Textarea = forwardRef(function Textarea(
 ) {
   const inputId = id || rest.name
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1.5">
       {label && (
-        <label htmlFor={inputId} className="text-xs font-medium text-rose">
+        <label htmlFor={inputId} className="text-sm font-medium text-cream/80">
           {label}
         </label>
       )}
@@ -17,8 +18,7 @@ export const Textarea = forwardRef(function Textarea(
         id={inputId}
         ref={ref}
         rows={rows}
-        aria-invalid={!!error}
-        className={`input-base resize-y ${error ? 'border-rose-deep' : ''} ${className}`}
+        className={cn('input-base resize-y', error && 'border-rose-deep/60', className)}
         {...rest}
       />
       {error && <span className="text-xs text-rose-deep">{error}</span>}

@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import { cn } from '../../lib/cn'
 
 /** Labelled text input with error display. Works with react-hook-form refs. */
 export const Input = forwardRef(function Input(
@@ -7,9 +8,9 @@ export const Input = forwardRef(function Input(
 ) {
   const inputId = id || rest.name
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1.5">
       {label && (
-        <label htmlFor={inputId} className="text-xs font-medium text-rose">
+        <label htmlFor={inputId} className="text-sm font-medium text-cream/80">
           {label}
         </label>
       )}
@@ -17,8 +18,7 @@ export const Input = forwardRef(function Input(
         id={inputId}
         ref={ref}
         type={type}
-        aria-invalid={!!error}
-        className={`input-base ${error ? 'border-rose-deep' : ''} ${className}`}
+        className={cn('input-base', error && 'border-rose-deep/60 focus:ring-rose/20', className)}
         {...rest}
       />
       {error && <span className="text-xs text-rose-deep">{error}</span>}

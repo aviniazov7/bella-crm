@@ -1,30 +1,25 @@
 /**
  * Reminders service.
- * Schema: { clientId, appointmentId, message, sendAt, sent }
  */
-import { collection, getDocs, query, where, orderBy } from 'firebase/firestore'
-import { db } from './firebase'
-import { createCollectionService, mapDoc } from './firestoreCrud'
+import { supabase } from './supabase'
+import { createCollectionService } from './supabaseCrud'
 
-const base = createCollectionService('reminders', { defaultOrderBy: 'sendAt' })
+const base = createCollectionService('reminders', { defaultOrderBy: 'send_at' })
 
-/** Reminders whose sendAt is in the past and that have not been sent yet. */
 export function pendingReminders(reminders, now = new Date()) {
-  return reminders.filter((r) => !r.sent && r.sendAt && new Date(r.sendAt) <= now)
+  return reminders.filter((r) => !r.sent && r.send_at && new Date(r.send_at) <= now)
 }
 
-/** Fetch reminders for a given client. */
 async function listByClient(clientId) {
-  const q = query(
-    collection(db, 'reminders'),
-    where('clientId', '==', clientId),
-    orderBy('sendAt', 'desc')
-  )
-  const snapshot = await getDocs(q)
-  return snapshot.docs.map(mapDoc)
+  const { data, error } = await supabase
+    .from('reminders')
+    .select('*')
+    .eq('client_id', clientId)
+    .order('send_at', { ascending: false })
+  if (error) throw error
+  return data || []
 }
 
-/** Mark a reminder as sent. */
 function markSent(id) {
   return base.update(id, { sent: true })
 }

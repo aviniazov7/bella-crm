@@ -53,12 +53,6 @@ function NavItems({ onNavigate }) {
                     transition={{ type: 'spring', stiffness: 400, damping: 32 }}
                   />
                 )}
-                {isActive && (
-                  <motion.span
-                    layoutId="nav-bar"
-                    className="absolute right-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full bg-gold-gradient"
-                  />
-                )}
                 <Icon
                   className={cn(
                     'relative z-10 h-[18px] w-[18px] transition-colors',

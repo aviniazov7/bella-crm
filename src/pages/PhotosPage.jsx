@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Plus, ImageIcon } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { useCollection } from '../hooks/useCollection'
+import { supabase } from '../services/supabase'
 import { useToast } from '../hooks/useToast'
 import { photosService, uploadPhoto } from '../services/photos'
 import { clientsService } from '../services/clients'
@@ -27,6 +28,42 @@ export function PhotosPage() {
   const [beforeFile, setBeforeFile] = useState(null)
   const [afterFile, setAfterFile] = useState(null)
   const [uploading, setUploading] = useState(false)
+
+  // Storage usage: sum object sizes in the photos folder of the bucket (0 if missing).
+  const [storageBytes, setStorageBytes] = useState(0)
+  useEffect(() => {
+    let cancelled = false
+    async function loadUsage() {
+      try {
+        const { data: clientFolders, error } = await supabase.storage
+          .from('bella-crm')
+          .list('photos', { limit: 1000 })
+        if (error || !clientFolders) return
+        let total = 0
+        for (const folder of clientFolders) {
+          const { data: files } = await supabase.storage
+            .from('bella-crm')
+            .list('photos/' + folder.name, { limit: 1000 })
+          for (const file of files || []) {
+            total += file?.metadata?.size || 0
+          }
+        }
+        if (!cancelled) setStorageBytes(total)
+      } catch {
+        /* bucket missing or no access -> keep 0 */
+      }
+    }
+    loadUsage()
+    return () => {
+      cancelled = true
+    }
+  }, [photos.items.length])
+
+  const formatStorage = (bytes) => {
+    if (bytes >= 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + 'MB'
+    if (bytes >= 1024) return (bytes / 1024).toFixed(0) + 'KB'
+    return bytes + 'B'
+  }
 
   const {
     register,
@@ -72,7 +109,12 @@ export function PhotosPage() {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="font-serif text-3xl font-bold text-cream">תמונות לפני / אחרי</h1>
+        <div className="flex flex-col gap-1">
+          <h1 className="font-serif text-3xl font-bold text-cream">תמונות לפני / אחרי</h1>
+          <p className="text-xs text-muted">
+            אחסון תמונות: {formatStorage(storageBytes)} מתוך 1GB · עד 50MB לתמונה
+          </p>
+        </div>
         <Button onClick={() => setOpen(true)}>
           <Plus className="h-4 w-4" /> העלאת תמונות
         </Button>

@@ -226,3 +226,32 @@
     opacity: 0;
   }
 }
+
+/* ── Calendar: near-invisible vertical & structural grid lines (issue fix) ── */
+.rbc-time-view,
+.rbc-time-header,
+.rbc-time-header-content,
+.rbc-time-header-cell,
+.rbc-time-content,
+.rbc-time-gutter,
+.rbc-time-column,
+.rbc-day-slot,
+.rbc-timeslot-group,
+.rbc-time-slot {
+  border-color: rgba(255, 255, 255, 0.03) !important;
+}
+.rbc-day-bg + .rbc-day-bg,
+.rbc-header + .rbc-header,
+.rbc-time-content > * + * > *,
+.rbc-time-header-content > .rbc-row,
+.rbc-time-header.rbc-overflowing,
+.rbc-time-header-content {
+  border-left-color: rgba(255, 255, 255, 0.03) !important;
+  border-right-color: rgba(255, 255, 255, 0.03) !important;
+}
+.rbc-time-content {
+  border-top-color: rgba(255, 255, 255, 0.05) !important;
+}
+.rbc-day-bg + .rbc-day-bg {
+  border-left: 1px solid rgba(255, 255, 255, 0.03) !important;
+}

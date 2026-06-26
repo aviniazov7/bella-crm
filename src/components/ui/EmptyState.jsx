@@ -13,7 +13,7 @@ export function EmptyState({ title, description, message, icon, action }) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="mx-auto flex max-w-sm flex-col items-center justify-center gap-4 px-6 py-12 text-center"
+      className="mx-auto flex max-w-sm flex-col items-center justify-center gap-4 px-6 py-8 text-center"
     >
       <motion.div
         animate={{ y: [0, -8, 0] }}

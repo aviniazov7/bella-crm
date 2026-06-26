@@ -33,8 +33,8 @@ function CountUp({ value }) {
 }
 
 const ACCENTS = {
-  gold: { badge: 'text-gold', stroke: '#c9a96e', fill: 'rgba(201,169,110,0.12)' },
-  rose: { badge: 'text-rose', stroke: '#d4a5a5', fill: 'rgba(212,165,165,0.12)' },
+  gold: { badge: 'text-gold', stroke: '#c08497', fill: 'rgba(192,132,151,0.12)' },
+  rose: { badge: 'text-rose', stroke: '#c08497', fill: 'rgba(212,165,165,0.12)' },
   neutral: { badge: 'text-muted', stroke: '#6f6f6f', fill: 'rgba(160,160,160,0.10)' },
 }
 

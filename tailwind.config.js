@@ -16,8 +16,8 @@ export default {
         line: '#1f1f1f',
         muted: '#a0a0a0',
         rose: { DEFAULT: '#d4a5a5', soft: '#f3e4e4', deep: '#b98787' },
-        gold: { DEFAULT: '#c9a96e', soft: '#e6d2ab', deep: '#a98c54' },
-        cream: '#f5efe6',
+        gold: { DEFAULT: '#c08497', soft: '#e8c5cf', deep: '#4a2f35', fg: '#2a1419' },
+        cream: '#faf0f2',
         positive: '#7fb88a',
         negative: '#cf8b8b',
       },
@@ -28,13 +28,13 @@ export default {
       boxShadow: {
         soft: '0 1px 0 rgba(255,255,255,0.02), 0 12px 40px rgba(0,0,0,0.45)',
         'soft-lg': '0 1px 0 rgba(255,255,255,0.03), 0 28px 70px rgba(0,0,0,0.55)',
-        glow: '0 0 0 1px rgba(201,169,110,0.10), 0 10px 40px rgba(0,0,0,0.5)',
-        gold: '0 6px 24px rgba(201,169,110,0.20)',
+        glow: '0 1px 2px rgba(0,0,0,0.3)',
+        gold: '0 1px 2px rgba(0,0,0,0.3)',
       },
       backgroundImage: {
-        'gold-gradient': 'linear-gradient(135deg, #e6d2ab 0%, #c9a96e 50%, #a98c54 100%)',
+        'gold-gradient': 'linear-gradient(135deg, #e8c5cf 0%, #c08497 55%, #4a2f35 100%)',
         'rose-gradient': 'linear-gradient(135deg, #f3e4e4 0%, #d4a5a5 50%, #b98787 100%)',
-        'champagne-text': 'linear-gradient(100deg, #e6d2ab 0%, #c9a96e 45%, #d4a5a5 100%)',
+        'champagne-text': 'linear-gradient(100deg, #e8c5cf 0%, #c08497 50%, #e8c5cf 100%)',
       },
       keyframes: {
         'fade-in': { '0%': { opacity: '0' }, '100%': { opacity: '1' } },

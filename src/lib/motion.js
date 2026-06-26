@@ -30,5 +30,5 @@ export const modalSpring = {
 
 export const rowHover = {
   rest: { backgroundColor: 'rgba(255,255,255,0)' },
-  hover: { backgroundColor: 'rgba(201,169,110,0.06)' },
+  hover: { backgroundColor: 'rgba(192,132,151,0.06)' },
 }

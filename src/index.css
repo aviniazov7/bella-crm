@@ -20,7 +20,7 @@
     margin: 0;
     font-family: 'Inter', system-ui, Arial, sans-serif;
     background-image:
-      radial-gradient(900px circle at 12% -8%, rgba(201, 169, 110, 0.05), transparent 45%),
+      radial-gradient(900px circle at 12% -8%, rgba(192,132,151, 0.05), transparent 45%),
       radial-gradient(800px circle at 92% 6%, rgba(212, 165, 165, 0.045), transparent 42%);
     background-attachment: fixed;
   }
@@ -104,9 +104,9 @@
 }
 .rbc-toolbar button:active,
 .rbc-toolbar button.rbc-active {
-  background-color: rgba(201, 169, 110, 0.14) !important;
-  border-color: rgba(201, 169, 110, 0.5) !important;
-  color: #e6d2ab !important;
+  background-color: rgba(192,132,151, 0.14) !important;
+  border-color: rgba(192,132,151, 0.5) !important;
+  color: #e8c5cf !important;
   box-shadow: none !important;
 }
 
@@ -165,22 +165,22 @@
 
 /* today highlight */
 .rbc-today {
-  background-color: rgba(201, 169, 110, 0.05) !important;
+  background-color: rgba(192,132,151, 0.05) !important;
 }
 .rbc-header.rbc-today {
-  color: #e6d2ab;
+  color: #e8c5cf;
 }
 
 /* current time indicator */
 .rbc-current-time-indicator {
-  background-color: #c9a96e;
+  background-color: #c08497;
   height: 2px;
-  box-shadow: 0 0 8px rgba(201, 169, 110, 0.6);
+  box-shadow: 0 0 8px rgba(192,132,151, 0.6);
 }
 
 /* events */
 .rbc-event {
-  background: linear-gradient(135deg, rgba(201, 169, 110, 0.9), rgba(185, 135, 135, 0.9));
+  background: linear-gradient(135deg, rgba(192,132,151, 0.9), rgba(74,47,53, 0.9));
   border: none;
   border-radius: 0.5rem;
   padding: 2px 8px;
@@ -190,13 +190,13 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 .rbc-event:focus {
-  outline: 2px solid #e6d2ab;
+  outline: 2px solid #e8c5cf;
 }
 .rbc-event.rbc-selected {
-  background: linear-gradient(135deg, #e6d2ab, #d4a5a5);
+  background: linear-gradient(135deg, #e8c5cf, #c08497);
 }
 .rbc-show-more {
-  color: #c9a96e;
+  color: #c08497;
   background: transparent;
 }
 
@@ -209,7 +209,7 @@
   color: #cfc6ba;
 }
 .rbc-date-cell.rbc-now {
-  color: #e6d2ab;
+  color: #e8c5cf;
   font-weight: 700;
 }
 .rbc-button-link {
